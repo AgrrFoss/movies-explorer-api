@@ -1,7 +1,7 @@
-const BadReqError = require('../../../react-mesto-api-full/backend/errors/bad_req');
 const Movie = require('../models/movie');
 const NotFoundError = require('../errors/not_found');
 const NoRightsError = require('../errors/no_rights');
+const BadReqError = require('../errors/bad_req');
 
 module.exports.getMovies = async (req, res, next) => {
   try {
