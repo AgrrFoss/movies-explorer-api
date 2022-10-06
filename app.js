@@ -12,8 +12,6 @@ const auth = require('./middlewares/auth');
 
 /** Разрешенные домены. */
 const allowedCors = [
-  'http://orlov.gregori.nomoredomains.sbs',
-  'https://orlov.gregori.nomoredomains.sbs',
   'http://localhost:3000',
   'https://localhost:3000',
 ];
