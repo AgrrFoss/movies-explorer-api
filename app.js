@@ -6,7 +6,7 @@ const cookieParser = require('cookie-parser');
 const { errors, celebrate, Joi } = require('celebrate');
 const { requestLogger, errorLogger } = require('./middlewares/logger');
 
-const { createUser, login, logout } = require('./controllers/users');
+// const { createUser, login, logout } = require('./controllers/users');
 const NotFoundError = require('./errors/not_found');
 const auth = require('./middlewares/auth');
 
@@ -48,6 +48,7 @@ app.use((req, res, next) => {
 });
 
 /** Основные роуты */
+/*
 app.post(
   '/signup',
   celebrate({
@@ -75,6 +76,12 @@ app.use(auth);
 
 app.use('/users/me', require('./routes/users'));
 app.use('/movies', require('./routes/movies'));
+*/
+
+app.use(require('./routes/beforeAuth'));
+app.use(auth);
+app.use(require('./routes/users'));
+app.use(require('./routes/movies'));
 
 /** обработка ошибки несуществующего адреса */
 app.use((req, res, next) => {
@@ -95,7 +102,8 @@ app.use((err, req, res, next) => {
     .status(statusCode)
     .send({
       message: statusCode === 500
-        ? `На сервере произошла ошибка ${err}`
+      ? `На сервере произошла ошибка ${err}`
+//        ? 'На сервере произошла ошибка'
         : message,
     });
   next();
