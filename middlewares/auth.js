@@ -19,7 +19,7 @@ module.exports = (req, res, next) => {
     next(err);
     return;
   }
-  console.log(payload)
+
   req.user = payload;
   next();
 };

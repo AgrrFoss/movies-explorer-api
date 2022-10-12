@@ -1,6 +1,7 @@
 const mongoose = require('mongoose');
 // const validator = require('validator');
 const user = require('./user');
+const reg = require('../utils/constants');
 
 const movieSchema = new mongoose.Schema({
   country: {
@@ -28,8 +29,7 @@ const movieSchema = new mongoose.Schema({
     required: true,
     validate: {
       validator(v) {
-        // eslint-disable-next-line no-useless-escape
-        return /^(https?:\/\/)?([\da-z\.-]+)\.([a-z\.]{2,6})([\/\w \.-]*)*\/?#?$/.test(v);
+        return reg.test(v);
       },
       message: 'передайте ссылку на изображение',
     },
@@ -39,8 +39,7 @@ const movieSchema = new mongoose.Schema({
     required: true,
     validate: {
       validator(v) {
-        // eslint-disable-next-line no-useless-escape
-        return /^(https?:\/\/)?([\da-z\.-]+)\.([a-z\.]{2,6})([\/\w \.-]*)*\/?#?$/.test(v);
+        return reg.test(v);
       },
       message: 'передайте ссылку на изображение',
     },
@@ -50,8 +49,7 @@ const movieSchema = new mongoose.Schema({
     required: true,
     validate: {
       validator(v) {
-        // eslint-disable-next-line no-useless-escape
-        return /^(https?:\/\/)?([\da-z\.-]+)\.([a-z\.]{2,6})([\/\w \.-]*)*\/?#?$/.test(v);
+        return reg.test(v);
       },
       message: 'передайте ссылку на изображение',
     },

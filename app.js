@@ -3,7 +3,7 @@ require('dotenv').config();
 const mongoose = require('mongoose');
 const bodyParser = require('body-parser');
 const cookieParser = require('cookie-parser');
-const { errors, celebrate, Joi } = require('celebrate');
+const { errors } = require('celebrate');
 const { requestLogger, errorLogger } = require('./middlewares/logger');
 
 // const { createUser, login, logout } = require('./controllers/users');
@@ -47,38 +47,8 @@ app.use((req, res, next) => {
   next();
 });
 
-/** Основные роуты */
-/*
-app.post(
-  '/signup',
-  celebrate({
-    body: Joi.object().keys({
-      name: Joi.string().min(2).max(30).required(),
-      email: Joi.string().required().email(),
-      password: Joi.string().required().min(6),
-    }),
-  }),
-  createUser,
-);
-app.post(
-  '/signin',
-  celebrate({
-    body: Joi.object().keys({
-      email: Joi.string().required().email(),
-      password: Joi.string().required().min(6),
-    }),
-  }),
-  login,
-);
-app.post('/signout', logout);
-
-app.use(auth);
-
-app.use('/users/me', require('./routes/users'));
-app.use('/movies', require('./routes/movies'));
-*/
-
 app.use(require('./routes/beforeAuth'));
+
 app.use(auth);
 app.use(require('./routes/users'));
 app.use(require('./routes/movies'));
@@ -102,8 +72,7 @@ app.use((err, req, res, next) => {
     .status(statusCode)
     .send({
       message: statusCode === 500
-      ? `На сервере произошла ошибка ${err}`
-//        ? 'На сервере произошла ошибка'
+        ? 'На сервере произошла ошибка'
         : message,
     });
   next();

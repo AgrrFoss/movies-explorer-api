@@ -78,12 +78,7 @@ module.exports.getUser = (req, res, next) => {
       }
     })
     .catch((e) => {
-      if (e.name === 'CastError') {
-        const err = new BadReqError(' передан некорректный _id пользователя');
-        next(err);
-      } else {
-        next(e);
-      }
+      next(e);
     });
 };
 
@@ -102,6 +97,11 @@ module.exports.updateUser = (req, res, next) => {
       }
     })
     .catch((e) => {
+      if (e.code === 11000) {
+        const err = new RepeatEmailError('Пользователь с таким адресом уже зарегистрирован');
+        next(err);
+        return;
+      }
       if (e.name === 'validationError') {
         const err = new BadReqError('Неверный тип данных');
         next(err);

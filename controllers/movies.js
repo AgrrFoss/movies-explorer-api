@@ -28,7 +28,6 @@ module.exports.createMovie = async (req, res, next) => {
       movieId,
     } = req.body;
     const owner = req.user._id;
-    console.log(owner)
     const movie = await Movie.create({
       country,
       director,
