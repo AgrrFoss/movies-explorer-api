@@ -1,3 +1,4 @@
+/* eslint-disable no-useless-escape */
 const moviesRouter = require('express').Router();
 const { celebrate, Joi } = require('celebrate');
 const { getMovies, createMovie, deleteMovie } = require('../controllers/movies');
@@ -14,9 +15,9 @@ moviesRouter.post(
       year: Joi.string().required(),
       description: Joi.string().required().min(2),
       image: Joi.string().required().min(7).pattern(/^(https?:\/\/)([\w\.]+)\.[a-z{2, 6}]/),
-      trailer: Joi.string().required().min(7).pattern(/^(https?:\/\/)([\w\.]+)\.[a-z{2, 6}]/),
+      trailerLink: Joi.string().required().min(7).pattern(/^(https?:\/\/)([\w\.]+)\.[a-z{2, 6}]/),
       thumbnail: Joi.string().required().min(7).pattern(/^(https?:\/\/)([\w\.]+)\.[a-z{2, 6}]/),
-      movieId: Joi.string().required(),
+      movieId: Joi.number().required(),
       nameRU: Joi.string().required().min(2).max(50),
       nameEN: Joi.string().required().min(2).max(50),
     }),

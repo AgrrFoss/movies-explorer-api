@@ -5,7 +5,6 @@ const { JWT_SECRET = 'dev1' } = process.env;
 
 module.exports = (req, res, next) => {
   const token = req.cookies.jwt;
-//  const token = req.headers.authorization.replace('Bearer ', '');
   if (!token) {
     const err = new AuthError('Необходима авторизация. отсутствует токен');
     next(err);
