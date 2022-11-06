@@ -54,7 +54,8 @@ module.exports.createMovie = async (req, res, next) => {
 };
 
 module.exports.deleteMovie = (req, res, next) => {
-  Movie.findById(req.params.movieId)
+ // Movie.findById(req.params.movieId)
+  Movie.findOne({ movieId: req.params.movieId })
     .then((movie) => {
       if (!movie) {
         throw new NotFoundError('Запись с таким _id не найдена.');
@@ -62,10 +63,10 @@ module.exports.deleteMovie = (req, res, next) => {
         const idString = String(movie.owner);
         if (idString === req.user._id) {
           Movie.deleteOne(movie)
-            .then(() => res.send({ message: 'Карточка удалека' }))
+            .then(() => res.send({ message: 'Карточка удалена' }))
             .catch(next);
         } else {
-          throw new NoRightsError('Вы не можете удалить чужую карточку');
+          throw new NoRightsError(`Вы не можете удалить чужую карточку ${movie.owner} ${req.user._id}`);
         }
       }
     })
