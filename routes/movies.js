@@ -29,7 +29,7 @@ moviesRouter.delete(
   '/movies/:movieId',
   celebrate({
     params: Joi.object().keys({
-      movieId: Joi.string().pattern(/[\da-f]{24}/),
+      movieId: Joi.string(),
     }),
   }),
   deleteMovie,
