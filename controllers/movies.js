@@ -5,7 +5,8 @@ const BadReqError = require('../errors/bad_req');
 
 module.exports.getMovies = async (req, res, next) => {
   try {
-    const movies = await Movie.find({});
+    const movies = await Movie.find({ owner: req.user._id });// проверить правильность работы этого
+    // метода и выдаваемых им карточек. Сохраненные карточки должы принадлежать владельцу.
     res.send(movies);
   } catch (e) {
     next(e);
