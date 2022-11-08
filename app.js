@@ -14,6 +14,8 @@ const auth = require('./middlewares/auth');
 const allowedCors = [
   'http://localhost:3000',
   'https://localhost:3000',
+  'https://movies-ex.orlov.nomoredomains.icu',
+  'http://movies-ex.orlov.nomoredomains.icu',
 ];
 
 const { PORT = 4000 } = process.env;
