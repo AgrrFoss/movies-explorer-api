@@ -56,7 +56,7 @@ module.exports.createMovie = async (req, res, next) => {
 
 module.exports.deleteMovie = (req, res, next) => {
  // Movie.findById(req.params.movieId)
-  Movie.findOne({ movieId: req.params.movieId })
+  Movie.findOne({ movieId: req.params.movieId, owner: req.user._id })
     .then((movie) => {
       if (!movie) {
         throw new NotFoundError('Запись с таким _id не найдена.');
